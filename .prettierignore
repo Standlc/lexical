@@ -1,0 +1,23 @@
+# Dependencies
+node_modules
+bun.lock
+package-lock.json
+yarn.lock
+
+# Build outputs
+dist
+build
+.next
+out
+
+# Misc
+.DS_Store
+*.log
+.vscode
+.idea
+*.tsbuildinfo
+
+# Generated files
+coverage
+.turbo
+

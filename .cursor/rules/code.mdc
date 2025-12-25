@@ -1,0 +1,27 @@
+---
+alwaysApply: true
+---
+
+## Coding Rules
+
+You are a senior software engineer who writes clean code.
+The four main rules for clean code are often associated with Kent Beck's "Four Rules of Simple Design": it must pass tests, it should reveal its intention, it must contain no duplication, and it should have the fewest elements possible. These rules prioritize making code functional, readable, maintainable, and simple.
+
+Clean code must:
+
+1. Run all the tests
+   Your code must be functional and correct, which is verified by tests.
+   Having a comprehensive test suite ensures that code adheres to good design principles like simplicity and the single responsibility principle.
+2. Reveal its intention
+   Code should be self-explanatory so other developers (and your future self) can understand its purpose without needing extensive comments.
+   This is achieved through meaningful names for variables, functions, and classes, as well as clear and concise code.
+3. Contain no duplication
+   The principle of "Don't Repeat Yourself" (DRY) is crucial for clean code.
+   Duplicated code increases complexity and makes the codebase more difficult to maintain and update.
+4. Minimize the number of elements
+   The goal is to have the simplest possible design with the fewest classes, methods, and variables necessary.
+   This simplifies the code, making it easier to understand, maintain, and test.
+
+### Technologies
+
+Instead of re-writting everything from scratch, we will use modern and fast techs to move fast (tanstack-query, vercel's AI sdk, tRPC, etc).

@@ -1,0 +1,75 @@
+# Production-optimized Dockerfile
+# This version is more efficient for production deployments
+
+FROM oven/bun:1 AS base
+WORKDIR /app
+
+# ============================================
+# Dependencies stage - install only what's needed
+# ============================================
+FROM base AS deps
+# Copy root workspace files
+COPY package.json bun.lock tsconfig.base.json ./
+
+# Copy package.json files for dependency resolution
+COPY server/package.json ./server/
+COPY packages/api-types/package.json ./packages/api-types/
+COPY packages/utils/package.json ./packages/utils/
+
+# Install production dependencies only
+RUN bun install --frozen-lockfile --production
+
+# ============================================
+# Builder stage - copy source and prepare for runtime
+# ============================================
+FROM base AS builder
+WORKDIR /app
+
+# Copy dependencies
+COPY --from=deps /app/node_modules ./node_modules
+
+# Copy workspace config
+COPY package.json bun.lock tsconfig.base.json ./
+
+# Copy ALL shared packages source (server needs them at runtime)
+COPY packages ./packages
+
+# Copy server source
+COPY server ./server
+
+# Optional: Run type checking
+RUN cd server && bun run typecheck
+
+# ============================================
+# Runner stage - minimal production image
+# ============================================
+FROM oven/bun:1-alpine AS runner
+WORKDIR /app
+
+# Add non-root user for security
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
+ENV NODE_ENV=production
+
+# Copy only what's needed to run
+COPY --from=builder --chown=appuser:appgroup /app/node_modules ./node_modules
+COPY --from=builder --chown=appuser:appgroup /app/packages ./packages
+COPY --from=builder --chown=appuser:appgroup /app/server ./server
+COPY --from=builder --chown=appuser:appgroup /app/package.json ./package.json
+COPY --from=builder --chown=appuser:appgroup /app/tsconfig.base.json ./tsconfig.base.json
+
+# Switch to non-root user
+USER appuser
+
+WORKDIR /app/server
+
+EXPOSE 3000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD bun --version || exit 1
+
+CMD ["bun", "run", "src/index.ts"]
+
+
+

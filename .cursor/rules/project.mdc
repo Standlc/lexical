@@ -1,0 +1,5 @@
+---
+alwaysApply: true
+---
+
+This project is organized as a monorepo. You should always follow the best practices to build clean and well organized source code.
