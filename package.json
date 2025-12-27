@@ -1,0 +1,22 @@
+{
+	"name": "lexical-app",
+	"private": true,
+	"workspaces": [
+		"apps/*",
+		"packages/*"
+	],
+	"scripts": {
+		"dev": "npm run dev:api & npm run dev:web",
+		"dev:web": "npm run dev -w @lexical/web",
+		"dev:api": "npm run dev -w @lexical/api",
+		"build": "npm run build --workspaces",
+		"clean": "npm run clean --workspaces --if-present",
+		"format": "prettier --write ."
+	},
+	"devDependencies": {
+		"prettier": "^3.4.2"
+	},
+	"engines": {
+		"node": ">=20"
+	}
+}

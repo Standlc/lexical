@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap");
+@import "tailwindcss";
+
+@theme {
+	--font-serif: "Cormorant Garamond", Georgia, serif;
+	--font-sans: "DM Sans", system-ui, sans-serif;
+
+	--color-bg-deep: #0d0c0f;
+	--color-bg-card: #16141a;
+	--color-bg-elevated: #1e1b24;
+
+	--color-border-subtle: rgba(255, 255, 255, 0.06);
+	--color-border-accent: rgba(230, 180, 100, 0.3);
+
+	--color-text-primary: #f5f3f0;
+	--color-text-secondary: #9a9498;
+	--color-text-muted: #5a5660;
+
+	--color-accent-gold: #e6b464;
+	--color-accent-gold-dim: rgba(230, 180, 100, 0.15);
+	--color-accent-warm: #d4a574;
+	--color-accent-rose: #c9a0a0;
+
+	--animate-fade-in-down: fade-in-down 0.8s ease-out;
+	--animate-fade-in-up: fade-in-up 0.6s ease-out;
+	--animate-fade-in-up-delayed: fade-in-up 0.6s ease-out 0.2s both;
+	--animate-fade-in-up-more-delayed: fade-in-up 0.6s ease-out 0.4s both;
+	--animate-spin: spin 0.8s linear infinite;
+	--animate-shimmer: shimmer 1.5s infinite;
+	--animate-blink: blink 1s step-end infinite;
+}
+
+@keyframes fade-in-down {
+	from {
+		opacity: 0;
+		transform: translateY(-20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fade-in-up {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes shimmer {
+	0% {
+		background-position: 200% 0;
+	}
+	100% {
+		background-position: -200% 0;
+	}
+}
+
+@keyframes blink {
+	50% {
+		opacity: 0;
+	}
+}
+
+html {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+body {
+	font-family: var(--font-sans);
+	background: var(--color-bg-deep);
+	color: var(--color-text-primary);
+}
