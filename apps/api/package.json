@@ -9,15 +9,18 @@
 		".": "./src/index.ts"
 	},
 	"scripts": {
-		"dev": "tsx watch src/index.ts",
+		"dev": "tsx watch --env-file=.env src/index.ts",
 		"build": "tsup src/index.ts --format esm --target node20",
 		"start": "node dist/index.js"
 	},
 	"dependencies": {
+		"@ai-sdk/openai": "^3.0.1",
 		"@hono/node-server": "^1.19.6",
 		"@hono/trpc-server": "^0.4.1",
 		"@trpc/server": "^11.8.1",
+		"ai": "^6.0.3",
 		"hono": "^4.11.3",
+		"openai": "^6.15.0",
 		"zod": "^3.24.0"
 	},
 	"devDependencies": {
