@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: lexical-postgres
+    restart: unless-stopped
+    ports:
+      - '5433:5432'
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-lexical}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-lexical}
+      POSTGRES_DB: ${POSTGRES_DB:-lexical}
+    volumes:
+      - lexical_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-lexical}']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  lexical_postgres_data:

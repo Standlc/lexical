@@ -2,8 +2,7 @@
 	"name": "lexical-app",
 	"private": true,
 	"workspaces": [
-		"apps/*",
-		"packages/*"
+		"apps/*"
 	],
 	"scripts": {
 		"dev": "npm run dev:api & npm run dev:web",
@@ -11,7 +10,15 @@
 		"dev:api": "npm run dev -w @lexical/api",
 		"build": "npm run build --workspaces",
 		"clean": "npm run clean --workspaces --if-present",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"db:start": "docker compose up -d",
+		"db:stop": "docker compose down",
+		"db:logs": "docker compose logs -f postgres",
+		"db:reset": "docker compose down -v && docker compose up -d",
+		"db:generate": "npm run db:generate -w @lexical/api",
+		"db:migrate": "npm run db:migrate -w @lexical/api",
+		"db:push": "npm run db:push -w @lexical/api",
+		"db:studio": "npm run db:studio -w @lexical/api"
 	},
 	"devDependencies": {
 		"prettier": "^3.4.2"
